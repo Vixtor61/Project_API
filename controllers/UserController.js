@@ -65,6 +65,8 @@ AuthController.store =  async function(req, res) {
 AuthController.profile = function (req, res) {
     console.log(req.session.user);
     a = JSON.parse(req.session.user);
+    console.log("ACA");
+    
     console.log(a.userId);
     
     

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const user = require('../models/Usuario');
+const pregunta = require('../models/Pregunta');
+const sonido = require('../models/Sonido');
 const upload =  require('../helpers/upload-helper');
 const fs = require('fs');
 
@@ -53,14 +55,53 @@ router.get('/perfil/:id', (req, res, next) => {
 });
 
 router.put('/perfil/:id', (req, res, next) => {
-    res.send('Put Perfil');
+    if(req.session.user){
+        res.send('Put Perfil');
+    }else{
+        res.render('login');
+    }
+    
 });
 
 router.get('/config/', (req,res)=>{
-    res.render('configuser');
+    if(req.session.user){
+        res.render('configuser');
+    }else{
+        res.render('login');
+    }
+    
 });
+router.get('/pregunta/',(req,res)=>{
+    
+})
+router.get('/sonido/:id',(req,res)=>{
+    sonido.findById(req.params.id).then(sonido => {
+        res.send(sonido);
+        console.log(sonido);
+        
+        
+    })
+    
+})
+router.post('/sonido/',(req,res)=>{
+    const nuevoSonido = new sonido({
+        ruta: req.body.ruta
+    });
+    
+    nuevoSonido.save().then(sonidoGuardado => {
+        console.log(sonidoGuardado);
+        
+        res.send(sonidoGuardado);
+    }).catch(err => {
+        console.error(err);
+        res.send('Ocurrió un error');
+    });
+})
+
+
 
 router.put('/config/:id', (req, res)=>{
+    
     let update = {
         nombre: req.body.nombre,
         //password: req.body.password
@@ -71,6 +112,8 @@ router.put('/config/:id', (req, res)=>{
             res.json({code: 500, err});
         }
         else{
+            console.log("HOOOOOOLA");
+            
             res.json({ok: true, nu, update});     
         }     
     });

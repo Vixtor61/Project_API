@@ -11,5 +11,5 @@ const PreguntaSchema = new Schema({
 });
 
 
-let User = mongoose.model('preguntas', UsuarioSchema);
+let User = mongoose.model('preguntas', PreguntaSchema);
 module.exports = User;

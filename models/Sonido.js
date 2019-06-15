@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 
-const PreguntaSchema = new Schema({
+const SonidoSchema = new Schema({
     
     ruta: {
         type: String,
@@ -11,5 +11,5 @@ const PreguntaSchema = new Schema({
 });
 
 
-let User = mongoose.model('sonido', UsuarioSchema);
+let User = mongoose.model('sonido',SonidoSchema);
 module.exports = User;
