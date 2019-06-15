@@ -71,9 +71,30 @@ router.get('/config/', (req,res)=>{
     }
     
 });
-router.get('/pregunta/',(req,res)=>{
-    
+router.get('/pregunta/:id',(req,res)=>{
+    pregunta.findById(req.params.id).populate('idSonido').then(pregunta => {
+        res.send(pregunta);
+        console.log(pregunta);
+        
+        
+    })
 })
+router.post('/pregunta/',(req,res)=>{
+    const nuevoPregunta = new pregunta({
+        idSonido: req.body.idSonido
+    });
+    
+    nuevoPregunta.save().then(preguntaGuardado => {
+        console.log(preguntaGuardado);
+        console.log(preguntaGuardado);
+        
+        res.send(preguntaGuardado);
+    }).catch(err => {
+        console.error(err);
+        res.send('Ocurrió un error');
+    });
+})
+
 router.get('/sonido/:id',(req,res)=>{
     sonido.findById(req.params.id).then(sonido => {
         res.send(sonido);
@@ -81,6 +102,13 @@ router.get('/sonido/:id',(req,res)=>{
         
         
     })
+    
+})
+router.get('/sonido/',(req,res)=>{
+    sonido.find({}).then(sonido =>{
+        res.send(sonido);
+    })
+
     
 })
 router.post('/sonido/',(req,res)=>{

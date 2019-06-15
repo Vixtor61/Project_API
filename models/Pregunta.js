@@ -4,10 +4,8 @@ const Schema = mongoose.Schema;
 
 const PreguntaSchema = new Schema({
     idSonido: {
-        type: String,
-        required: true
-    },
-    autor: { type: Schema.ObjectId, ref: "sonido" } 
+        type: Schema.Types.ObjectId, ref: 'sonido' 
+    }
 });
 
 
