@@ -9,14 +9,24 @@ const fs = require('fs');
 /** Rutas de archivos */
 router.get('/profile/:id', (req, res, next) => {
     //res.render('mainUser')
-    console.log(req.params.id);
-    user.findById(req.params.id).then(usuario => {
-        // res.send(usuario.archivos);
-        console.log(usuario);
-        res.render('mainUser',{user: usuario.nombre,
-            usrid: usuario.id});
-        // res.send('archivo cargado')
-    })
+    console.log("SESION");
+    console.log("  ");
+    
+    console.log(req.session.user);
+    
+    if(req.session.user){
+        console.log(req.params.id);
+        user.findById(req.params.id).then(usuario => {
+            // res.send(usuario.archivos);
+            console.log(usuario);
+            res.render('mainUser',{user: usuario.nombre,
+                usrid: usuario.id});
+            // res.send('archivo cargado')
+        })
+    }else{
+        res.render("login")
+    }
+    
 });
 
 //creacion de nuevos usuarios
