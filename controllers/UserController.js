@@ -112,6 +112,8 @@ AuthController.signin = function (req, res,next) {
                         return res.redirect('/users/profile/'+data.userId);
                     }
                     else{
+                        console.log(user);
+                        
                         console.log("RIP2");
                         return res.redirect('/');
                     }
