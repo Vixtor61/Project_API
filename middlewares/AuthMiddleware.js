@@ -19,6 +19,8 @@ AuthMiddleware.isAuthentication = function (req, res, next) {
             }
             else {
                 if (!user) {
+                    console.log("hlkhl");
+                    
                     return res.redirect('/');
                 }
                 else {

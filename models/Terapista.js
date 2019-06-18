@@ -27,7 +27,7 @@ const UsuarioSchema = new Schema({
     },
     numero_terapista: {
         type: String,
-        required: true
+        required: false
     }
     ,
     activo: {
@@ -41,6 +41,8 @@ const UsuarioSchema = new Schema({
 });
 
 UsuarioSchema.statics.authenticate = function (correo, password, callback) {
+    console.log("HOLA");
+    
     User.findOne({ correo: correo })
         .exec(function (err, user) {
             if (err) {

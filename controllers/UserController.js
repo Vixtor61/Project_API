@@ -26,6 +26,8 @@ AuthController.store =  async function(req, res) {
         if (error) {
             // si se produce algun error
             //Devolvemos una vista con los mensajes de error
+            console.log(error);
+            
             console.log('lele');
             return res.render('login', { err: error, correo: user.correo });
         }
@@ -75,6 +77,7 @@ AuthController.profile = function (req, res) {
 }
 /*Para ingresar al sistema*/
 AuthController.signin = function (req, res,next) {
+    console.log("RIP1");
     var data = {};
     //user autentication es el metodo que nos permitira ingresar al sistema
     console.log("RIP1");
