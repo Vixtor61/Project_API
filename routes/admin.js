@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Usuario = require('../models/Usuario');
+const Usuario = require('../models/Terapista');
 var MongoClient = require('mongodb').MongoClient;
 
 // Ruta principal de la pantalla admin

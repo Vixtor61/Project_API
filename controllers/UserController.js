@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose'); //libreria para el manejo a la conexion de bases de datos
-const User = require("../models/Usuario"); //modelo usuarios.
+const User = require("../models/Terapista"); //modelo usuarios.
 const AuthController = {}; // objeto que tendra la logica de nuestra web
 const bcrypt = require('bcrypt'); //libreria para encriptar
 

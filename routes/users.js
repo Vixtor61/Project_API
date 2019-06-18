@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const user = require('../models/Usuario');
+const user = require('../models/Terapista');
 const pregunta = require('../models/Pregunta');
 const sonido = require('../models/Sonido');
 const upload =  require('../helpers/upload-helper');
@@ -151,7 +151,7 @@ const AuthController = require("../controllers/UserController");
 //Requerimos el Middelware que hemos creado
 const AuthMiddleware = require("../middlewares/AuthMiddleware");
 //Requerimos el modelo
-const User = require("../models/Usuario");
+const User = require("../models/Terapista");
 //ruta que nos devolvera el formulario para crear usuarios
 router.post('/signup',AuthController.store);
 

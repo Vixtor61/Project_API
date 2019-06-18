@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require("../models/Usuario");
+const User = require("../models/Terapista");
 const bcrypt = require('bcrypt');
 
 const AuthMiddleware = {};
