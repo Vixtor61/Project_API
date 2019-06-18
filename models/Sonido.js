@@ -7,6 +7,10 @@ const SonidoSchema = new Schema({
     ruta: {
         type: String,
         required: true
+    },
+    rutaImg: {
+        type: String,
+        required: true
     }
 });
 
