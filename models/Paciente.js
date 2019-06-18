@@ -18,6 +18,9 @@ const PacienteSchema = new Schema({
     fecha_ingreso: {
         type: String,
         required: true
+    },
+    num_terapista: {
+        type: Schema.Types.ObjectId, ref: 'user' 
     }
     
     

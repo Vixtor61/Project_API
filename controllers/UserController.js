@@ -81,7 +81,8 @@ AuthController.signin = function (req, res,next) {
     User.authenticate(req.body.correo, req.body.password, (error, user) => {
         if (error || !user) {
             console.log("RIP");
-            res.status(69);
+            res.status(404);
+            res.json({code: 404, error});
             
            // res.render('login', { err: error, correo: req.body.correo });
             //return res.send("Ddd");

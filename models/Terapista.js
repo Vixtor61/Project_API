@@ -25,6 +25,11 @@ const UsuarioSchema = new Schema({
         type: String,
         //required: true
     },
+    numero_terapista: {
+        type: String,
+        required: true
+    }
+    ,
     activo: {
         type: Boolean,
         default: true
