@@ -18,8 +18,8 @@ AuthController.store =  async function(req, res) {
         correo: req.body.correo,
         password: req.body.password,
         nombre: req.body.nombre,
-        tipo: 'user',
-        capacidad: 1024
+        apellido: req.body.apellido,
+        tipo: 'user'
     };
     /*alamcenando el usuario*/
      await User.create(user, (error, user) => { 

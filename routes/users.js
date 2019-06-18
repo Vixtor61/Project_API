@@ -113,7 +113,8 @@ router.get('/sonido/',(req,res)=>{
 })
 router.post('/sonido/',(req,res)=>{
     const nuevoSonido = new sonido({
-        ruta: req.body.ruta
+        ruta: req.body.ruta,
+        rutaImg: req.body.rutaImg
     });
     
     nuevoSonido.save().then(sonidoGuardado => {
