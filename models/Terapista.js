@@ -25,6 +25,10 @@ const UsuarioSchema = new Schema({
         type: String,
         //required: true
     },
+    activo: {
+        type: Boolean,
+        default: false
+    } ,
     modify: {
         type: Boolean,
         default: false

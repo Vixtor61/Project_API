@@ -77,8 +77,11 @@ AuthController.profile = function (req, res) {
 AuthController.signin = function (req, res,next) {
     var data = {};
     //user autentication es el metodo que nos permitira ingresar al sistema
+    console.log("RIP1");
     User.authenticate(req.body.correo, req.body.password, (error, user) => {
         if (error || !user) {
+            console.log("RIP");
+            
             res.render('login', { err: error, correo: req.body.correo });
             //return res.send("Ddd");
         }
@@ -87,6 +90,7 @@ AuthController.signin = function (req, res,next) {
                 data.correo= user.correo,
                 data.password=user.password,
                 data.tipo=user.tipo,
+                data.apellido = user.apellido,
                 data.activo=user.activo
             
             //este método nos encriptara el userId para que sea alamcenado en la sesion
@@ -108,6 +112,7 @@ AuthController.signin = function (req, res,next) {
                         return res.redirect('/users/profile/'+data.userId);
                     }
                     else{
+                        console.log("RIP2");
                         return res.redirect('/');
                     }
                 }

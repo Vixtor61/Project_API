@@ -6,6 +6,8 @@ const AuthMiddleware = {};
 AuthMiddleware.isAuthentication = function (req, res, next) {
     if(!req.session.user) // verificamos is existe la session
     {
+        
+        
         return res.redirect('/'); //redirigimos al index si esto no es posible
     }
     //si existe la sesion parsea el contenido
