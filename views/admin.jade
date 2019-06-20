@@ -16,31 +16,18 @@ body
         table.table.table-dark.table-hover
           thead
             tr
-              th(scope='col') Nombre
-              th(scope='col') Correo
-              th(scope='col') Capacidad
-              th(scope='col') Tipo
-              th(scope='col') Activo
-              th(scope='col') 
+              th(scope='col') PREGUNTA_ID
+              th(scope='col') RUTA SONIDO
+              th(scope='col') RUTA IMG
           tbody
-            each value, index in users 
+            each value, index in preguntas
               tr
-                td #{value.nombre}
-                td #{value.correo}
-                td #{value.capacidad}
-                td #{value.tipo}
-                td #{value.activo} 
-                td 
-                  form.d-flex.justify-content-end(action='/admin/perf_editar/'+value.id+'/#{JSON.parse(session.user).userId}', method='post' ,id='modf')
-                    input#tamanhio7.form-control.mr-sm-2(type='number', name='capacidad', min='1024', max='5000', placeholder='Capacidad')
-                    select(name='opts')
-                      option(value='activar') Activar
-                      option(value='desactivar') Desactivar
-                    input(type='submit',value="Modificar") 
-
-
+                td #{value._id}
+                td #{value.idSonido.ruta}
+                td #{value.idSonido.rutaImg }
+            
     footer
       .fixed-bottom
         .card.text-center
           .card-footer.text-muted
-            | UCACloud
+            | :)

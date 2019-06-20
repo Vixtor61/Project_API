@@ -330,7 +330,8 @@ router.post('/preguntas/', (req, res, next) => {
                 console.log(sonidoGuardado);
                 
                     const nuevoPregunta = new pregunta({
-                        idSonido: sonidoGuardado._id
+                        idSonido: sonidoGuardado._id,
+                        nivel: "2"
                     });
                     nuevoPregunta.save().then(pregunta=>{
                         console.log(pregunta);
