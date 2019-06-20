@@ -8,7 +8,7 @@ body
             img(src='/image/logo.png')
             h2 cochlear
         .btn-group(role='group', aria-label='Basic example')
-          button.btn.btn-secondary(type='button') Crear Nuevo Usuario Admin
+          button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#exampleModalCenter1') Nueva Pregunta
           button.btn.btn-secondary(type='button') #{user} Configuracion
           button.btn.btn-secondary(type='button', onclick="location.href='/users/logout';") Cerrar sesion
     .contentAdmin
@@ -25,6 +25,23 @@ body
                 td #{value._id}
                 td #{value.idSonido.ruta}
                 td #{value.idSonido.rutaImg }
+    #exampleModalCenter1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+          .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+              .modal-header
+                
+                h5#exampleModalCenterTitle.modal-title Subir Archivos
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') &times;
+              .modal-body
+                  h2 Subir archivos
+                  form#fileinput(ref='input', action='/users/preguntas/', method='post', enctype='multipart/form-data')
+                    input(type="text", name = 'nivel' required = 'true')
+                    p SOUND
+                    input(type='file', name='input' required = 'true')
+                    p IMG
+                    input(type='file', name='input2' required = 'true')
+                    input(type='submit', value='Upload!')         
             
     footer
       .fixed-bottom
