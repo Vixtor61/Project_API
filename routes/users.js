@@ -6,7 +6,6 @@ const sonido = require('../models/Sonido');
 const upload =  require('../helpers/upload-helper');
 const fs = require('fs');
 
-//Modificar todos los findbyid , estan quemados a 5bfee5f78763d84258a7c7d1
 
 /** Rutas de archivos */
 router.get('/profile/:id', (req, res, next) => {
@@ -128,6 +127,237 @@ router.post('/sonido/',(req,res)=>{
 })
 
 
+router.post('/archivo/:id', (req, res, next) => {
+    var dir = __dirname + '/upload';
+    // if (!path.existsSync(dir)) {
+    //     fs.mkdirSync(dir);
+    // }
+    if (!path.existsSync('/img') && !path.existsSync('/sounds') ) {
+        fs.mkdirSync('/img');
+        fs.mkdirSync('/sounds');
+    }
+
+    if(req.files){
+        if(!upload.isEmpty(req.files)){
+            //input ===> nombre de inputfile jade
+            let file = req.files.input;
+            let img = req.files.input2;
+            let alias= req.files.input.name;
+            let filename = req.params.id+'_'+Date.now() + '_' +file.name;
+            let filenameIMG = req.params.id+'_'+Date.now() + '_' +img.name;
+            file.mv('./public/upload/'+filename, (err)=>{
+                if(err) throw err;
+            });
+            
+            file.mv('./public/upload/sounds/'+filename, (err)=>{
+                if(err) throw err;
+            });
+            
+            file.mv('./public/upload/img/'+filenameIMG, (err)=>{
+                if(err) throw err;
+            });
+
+
+            
+            
+            user.findById("5d0ad7934bf3b215a14b5695").then(data=>{
+           
+                
+                console.log(data);
+                
+            })
+            console.log(req.params.id);
+            user.findById(req.params.id).then(data => {
+                let stadistica = fs.statSync('./public/upload/'+filename);
+                console.log(data);
+               
+                switch (file.mimetype) {
+                    case 'application/x-msexcel':
+                        data.archivos.push({
+                            alias: alias,
+                            nombre: filename,
+                            tipo: file.mimetype,
+                            peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                            icono: 'fa fa-file-excel'
+                            });
+                            break;
+                    case 'application/msword':
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file-word'
+                        });
+                            break;
+                    case 'audio/mpeg':
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-music'
+                        });
+                            break;
+                    case 'audio/mp3':
+                        data.archivos.push({
+                            alias: alias,
+                            nombre: filename,
+                            tipo: file.mimetype,
+                            peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                            icono: 'fa fa-music'
+                        });
+                            break;
+                    case 'application/x-rar-compressed':
+                        data.archivos.push({
+                            alias: alias,
+                            nombre: filename,
+                            tipo: file.mimetype,
+                            peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                            icono: 'fa fa-file-archive'
+                        });
+                            break;
+                    case 'application/zip':
+                        data.archivos.push({
+                            alias: alias,
+                            nombre: filename,
+                            tipo: file.mimetype,
+                            peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                            icono: 'fa fa-file-archive'
+                        });
+                            break;
+                    case 'application/vnd.ms-powerpoint':
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file-powerpoint'
+                        });
+                            break;
+    
+                    case 'image/png':
+                    console.log(alias);
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file-image'
+                        });
+                            break;         
+                    case 'image/jpeg':
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file-image'
+                        });
+                            break;      
+                    case 'video/mpeg':
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file-video'
+                        });
+                            break;     
+                    default:
+                    data.archivos.push({
+                        alias: alias,
+                        nombre: filename,
+                        tipo: file.mimetype,
+                        peso: Math.round((stadistica['size']/1048576.0)*100)/100,
+                        icono: 'fa fa-file'
+                        });
+                            break;
+                }
+                
+                
+                data.modify = true;
+                data.save().then(() => {
+                    res.redirect('/users/profile/' + req.params.id)
+                });
+                
+            }).catch((err)=>{
+                    console.log(err);
+                    
+            })
+        }
+    }else{
+        console.log("HOLAAAA");
+    }
+    
+    
+});
+router.post('/preguntas/', (req, res, next) => {
+    var dir = __dirname + '/upload';
+    // if (!path.existsSync(dir)) {
+    //     fs.mkdirSync(dir);
+    // }
+    /*
+    if (!path.existsSync('/img') && !path.existsSync('/sounds') ) {
+        fs.mkdirSync('/img');
+        fs.mkdirSync('/sounds');
+    }
+*/
+    if(req.files){
+        if(!upload.isEmpty(req.files)){
+            //input ===> nombre de inputfile jade
+            let file = req.files.input;
+            let img = req.files.input2;
+            let alias= req.files.input.name;
+            let filename = req.params.id+'_'+Date.now() + '_' +file.name;
+            let filenameIMG = req.params.id+'_'+Date.now() + '_' +img.name;
+            let ruta = '/public/upload/sounds/'+filename
+            let rutaIMG = '/public/upload/img/'+filenameIMG
+            file.mv('./public/upload/sounds/'+filename, (err)=>{
+                if(err) throw err;
+            });
+            
+            file.mv('./public/upload/img/'+filenameIMG, (err)=>{
+                if(err) throw err;
+            });
+            
+            const nuevoSonido = new sonido({
+                ruta: ruta,
+                rutaImg: rutaIMG
+            });
+            
+            nuevoSonido.save().then(sonidoGuardado => {
+                console.log(sonidoGuardado);
+                
+                    const nuevoPregunta = new pregunta({
+                        idSonido: sonidoGuardado._id
+                    });
+                    nuevoPregunta.save().then(pregunta=>{
+                        console.log(pregunta);
+                    
+                    }).catch(err=>{
+                        console.error(err);
+                        res.send('Ocurrió un error');
+                    })
+
+                
+                
+                res.send(sonidoGuardado);
+            }).catch(err => {
+                console.error(err);
+                res.send('Ocurrió un error');
+            });
+
+
+
+            
+        }
+    }else{
+        console.log("HOLAAAA");
+    }
+    
+    
+});
 
 router.put('/config/:id', (req, res)=>{
     

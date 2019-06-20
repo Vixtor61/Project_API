@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 
 const PreguntaSchema = new Schema({
     idSonido: {
-        type: Schema.Types.ObjectId, ref: 'sonido' 
+        type: Schema.Types.ObjectId, ref: 'sonido' ,
+        required: true
+    },
+    nivel: {
+        type: String,
+        required: true
     }
 });
 
