@@ -18,13 +18,21 @@ body
             tr
               th(scope='col') PREGUNTA_ID
               th(scope='col') RUTA SONIDO
+              th(scope='col') Descargar
               th(scope='col') RUTA IMG
+              th(scope='col') Descargar
+               
           tbody
             each value, index in preguntas
               tr
                 td #{value._id}
                 td #{value.idSonido.ruta}
+                td 
+                  a(href='#{value.idSonido.ruta}', download="#{value.idSonido.ruta}") Descargar Sonido
                 td #{value.idSonido.rutaImg }
+                td
+                  a(href='#{value.idSonido.rutaImg}', download="#{value.idSonido.rutaImg}") Descargar Img
+                
     #exampleModalCenter1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
           .modal-dialog.modal-dialog-centered(role='document')
             .modal-content

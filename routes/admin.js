@@ -6,7 +6,10 @@ var MongoClient = require('mongodb').MongoClient;
 
 // Ruta principal de la pantalla admin
 router.get('/profile/:id', function(req, res, next) {
-    Usuario.findById(req.body.id).then(usuario => {
+   
+    var user =JSON.parse(req.session.user);
+    if(user.tipo == 'admin'){
+        
         Pregunta.find({},function(err,users){
          
         }).populate('idSonido').then(users=>{
@@ -18,20 +21,20 @@ router.get('/profile/:id', function(req, res, next) {
                 if(user.idSonido.rutaImg && user.idSonido.ruta){
                     listSonidos[user._id] = user.idSonido;
                 listUsers[user._id] =user;
-                console.log("HERE");
-                console.log(user);
+               // console.log("HERE");
+               // console.log(user);
                 
                 
-                console.log(user.idSonido);
+               // console.log(user.idSonido);
                 }
                 
             }
                 
                 
               });
-              res.render('admin', { admin: usuario, preguntas: listUsers,sonidos: listSonidos });
+              res.render('admin', {  preguntas: listUsers,sonidos: listSonidos });
         })     
-    });
+    }
 })
 
 
