@@ -36,9 +36,7 @@ router.post('/pregunta/',(req,res)=>{
     });
     
     nuevoPregunta.save().then(preguntaGuardado => {
-        console.log(preguntaGuardado);
-        console.log(preguntaGuardado);
-        
+
         res.send(preguntaGuardado);
     }).catch(err => {
         console.error(err);
@@ -49,7 +47,6 @@ router.post('/pregunta/',(req,res)=>{
 router.get('/sonido/:id',(req,res)=>{
     sonido.findById(req.params.id).then(sonido => {
         res.send(sonido);
-        console.log(sonido);
         
         
     }).catch(err => {
@@ -136,8 +133,7 @@ router.post('/preguntas/', (req, res, next) => {
                         })
     
                     
-                    
-                  //  res.send(sonidoGuardado);
+             
                 }).catch(err => {
                     console.error(err);
                     res.send('Ocurrió un error');
@@ -155,12 +151,12 @@ router.post('/preguntas/', (req, res, next) => {
             
         }else{
             res.redirect('/admin/profile/'+us.userId)
-            console.log("No");
+         
             
         }
     }else{
         res.redirect('/admin/profile/'+us.userId)
-        console.log("NO");
+      
     }
     
     

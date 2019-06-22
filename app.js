@@ -14,10 +14,6 @@ const MongoStore = require('connect-mongo')(session);
 //Credenciales de nuestra base de datos
 const {mongodb}=require('./configs/keys');
 
-
-
-//mongoose.connect('mongodb://localhost:27017/UcaCloud', { useNewUrlParser: true })
-// var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
 var apiRouter = require('./routes/api');
@@ -53,11 +49,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(upload());
 
-// 
-// app.use((req, res, next)=>{
-//     res.locals.user = req.user || null;
-//     next();
-// })
+
 app.use((req,res,next)=>{
     app.locals.session = req.session;
     next();

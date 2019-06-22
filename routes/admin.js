@@ -13,26 +13,21 @@ router.get('/profile/:id', function(req, res, next) {
         Pregunta.find({},function(err,users){
          
         }).populate('idSonido').then(users=>{
-            var listUsers = {};
+            var listPreguntas = {};
             var listSonidos = {};
             users.forEach(function(user) {
-               // user.ruta = user.idSonido.ruta;
                if(user.idSonido){
                 if(user.idSonido.rutaImg && user.idSonido.ruta){
                     listSonidos[user._id] = user.idSonido;
-                listUsers[user._id] =user;
-               // console.log("HERE");
-               // console.log(user);
-                
-                
-               // console.log(user.idSonido);
+                listPreguntas[user._id] =user;
+      
                 }
                 
             }
                 
                 
               });
-              res.render('admin', {  preguntas: listUsers,sonidos: listSonidos });
+              res.render('admin', {  preguntas: listPreguntas });
         })     
     }
 })

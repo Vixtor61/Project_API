@@ -65,30 +65,24 @@ AuthController.store =  async function(req, res) {
 };    
 /*nos dirigira al perfil */
 AuthController.profile = function (req, res) {
-    console.log(req.session.user);
-    a = JSON.parse(req.session.user);
-    console.log("ACA");
+
+    user = JSON.parse(req.session.user);
+
     
-    console.log(a.userId);
-    
-    
-    
-    return res.redirect('profile/'+a.userId);
+    return res.redirect('profile/'+user.userId);
 }
 /*Para ingresar al sistema*/
 AuthController.signin = function (req, res,next) {
-    console.log("RIP1");
+
     var data = {};
     //user autentication es el metodo que nos permitira ingresar al sistema
-    console.log("RIP1");
+
     User.authenticate(req.body.correo, req.body.password, (error, user) => {
         if (error || !user) {
-            console.log("RIP");
+         
             res.status(404);
             res.json({code: 404, error});
-            
-           // res.render('login', { err: error, correo: req.body.correo });
-            //return res.send("Ddd");
+     
         }
         else {
                 data.userId= user._id.toString(),
@@ -104,12 +98,12 @@ AuthController.signin = function (req, res,next) {
                 if (err) {
                     next(err);
                 }
-              //  data.userId = hash;
+             
                 //parseamos el objeto a cadena
 
                 req.session.user = JSON.stringify(data);
                 //si es correcto nos dirigira al perfil del usuario que esta ingresando.
-                console.log(user.tipo);
+                
                 if(user.tipo == 'admin'){
                     return res.redirect('/admin/profile/'+data.userId);
                 }
@@ -118,9 +112,6 @@ AuthController.signin = function (req, res,next) {
                         return res.redirect('/users/profile/'+data.userId);
                     }
                     else{
-                        console.log(user);
-                        
-                        console.log("RIP2");
                         return res.redirect('/');
                     }
                 }
