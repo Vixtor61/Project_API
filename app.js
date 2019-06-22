@@ -20,6 +20,7 @@ const {mongodb}=require('./configs/keys');
 // var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 var adminRouter = require('./routes/admin');
 
 var dir = __dirname + '/public/upload';
@@ -65,6 +66,7 @@ app.use((req,res,next)=>{
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
 
 

@@ -43,16 +43,11 @@ body
                   span(aria-hidden='true') &times;
               .modal-body
                   h2 Subir archivos
-                  form#fileinput(ref='input', action='/users/preguntas/', method='post', enctype='multipart/form-data')
+                  form#fileinput(ref='input', action='/api/preguntas/', method='post', enctype='multipart/form-data')
                     input(type="text", name = 'nivel' required = 'true')
                     p SOUND
                     input(type='file', name='input' required = 'true')
                     p IMG
                     input(type='file', name='input2' required = 'true')
                     input(type='submit', value='Upload!')         
-            
-    footer
-      .fixed-bottom
-        .card.text-center
-          .card-footer.text-muted
-            | :)
+
